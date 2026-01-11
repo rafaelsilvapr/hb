@@ -1,23 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const splash = document.getElementById('splash');
     const mainContent = document.getElementById('main-content');
     const hero = document.getElementById('hero');
     const navbar = document.getElementById('navbar');
 
-    if (!splash || !mainContent || !hero || !navbar) {
-        console.error('Missing required elements in index.html');
-        // Fallback: show main content if elements are missing
-        if (mainContent) mainContent.classList.remove('hidden');
-        if (navbar) navbar.classList.remove('hidden');
-        if (splash) splash.classList.add('hidden');
-        return;
-    }
-
-    // Initialize site immediately
-    revealItems();
-    if (hero) hero.classList.add('active');
-
-    // Scroll Reveal Intersection Observer
+    // Scroll Reveal Intersection Observer function
     const revealItems = () => {
         const reveals = document.querySelectorAll('.reveal');
         const observer = new IntersectionObserver((entries) => {
@@ -31,13 +17,21 @@ document.addEventListener('DOMContentLoaded', () => {
         reveals.forEach(reveal => observer.observe(reveal));
     };
 
+    // Initialize site immediately
+    revealItems();
+    if (hero) hero.classList.add('active');
+    if (mainContent) mainContent.classList.remove('hidden');
+    if (navbar) navbar.classList.remove('hidden');
+
     // Navbar scroll logic
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 100) {
-            navbar.classList.add('scrolled');
-            navbar.classList.remove('hidden');
-        } else {
-            navbar.classList.remove('scrolled');
+        if (navbar) {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+                navbar.classList.remove('hidden');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
         }
 
         // Simple parallax for hero image
