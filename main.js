@@ -13,19 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    // Splash Screen timeout
-    setTimeout(() => {
-        splash.style.opacity = '0';
-        setTimeout(() => {
-            splash.classList.add('hidden');
-            mainContent.classList.remove('hidden');
-            navbar.classList.remove('hidden');
-
-            // Trigger initial scroll reveals
-            revealItems();
-            hero.classList.add('active');
-        }, 1000);
-    }, 2500);
+    // Initialize site immediately
+    revealItems();
+    if (hero) hero.classList.add('active');
 
     // Scroll Reveal Intersection Observer
     const revealItems = () => {
